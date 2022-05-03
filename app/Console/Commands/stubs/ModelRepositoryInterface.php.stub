@@ -1,0 +1,5 @@
+<?php
+
+namespace DummyNamespace;
+
+interface DummyClass extends EloquentRepositoryInterface {}

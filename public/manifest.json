@@ -1,0 +1,20 @@
+{
+  "short_name": "Erie",
+  "name": "Erie Water Distribution",
+  "icons": [
+    {
+      "src": "/icons/windows10/SmallTile.scale-100.png",
+      "sizes": "71x71"
+    },
+    {
+      "src": "/icons/windows10/SmallTile.scale-125.png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#fffff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#3B5998",
+  "description": "Erie Water Distribution Company"
+}

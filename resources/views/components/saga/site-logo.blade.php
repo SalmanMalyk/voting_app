@@ -1,0 +1,1 @@
+<img src="{{ asset('assets/media/logo/erie-logo.png') }}" {{ $attributes->class(['img-responsive']) }}>
