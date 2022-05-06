@@ -19,18 +19,11 @@ $("#createMilestone").on("submit", function(event){
 		preConfirm: async () => {
 			await axios.post(route(`${path}.store`), formData)
 			.then(({ data }) => {
-				Swal2.fire({
-					title: 'Success',
-					icon: 'success',
-					html: data.message,
-					confirmButtonText: 'Done',
-					showCancelButton: false,
-					allowOutsideClick: false,
-					confirmButtonColor: '#2ecc71'
-				})
-				.then((result) => {
-					if (result.isConfirmed) {
-						$('#createMilestoneModal').modal('toggle')
+				Toast.fire({
+							title: data.message,
+							icon: 'success'
+						})
+				$('#createMilestoneModal').modal('toggle')
 						$('.milestone').prepend(`
 							<div class="col-xl-4">
 								<a class="block block-rounded block-link-shadow" href="javascript:void(0)">
@@ -65,8 +58,6 @@ $("#createMilestone").on("submit", function(event){
 						</div>
 							`);
 						 $('#createMilestone').trigger("reset");
-					}
-				})
 				return data;
 			})
 			.catch(error => {

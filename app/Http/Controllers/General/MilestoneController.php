@@ -46,6 +46,7 @@ class MilestoneController extends Controller
 
         return response()->json(['message'      => 'Milestone created successfully.',
                                  'milestone'    => $milestone,
+                                 'success'      => true,
                                  200]);
 
     }
