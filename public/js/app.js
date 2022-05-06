@@ -406,7 +406,7 @@ var Ziggy = {
       "uri": "terms-of-service",
       "methods": ["GET", "HEAD"]
     },
-    "policy.show": {
+    "dashboard.privacyPolicy": {
       "uri": "privacy-policy",
       "methods": ["GET", "HEAD"]
     },
@@ -716,6 +716,18 @@ var Ziggy = {
       "bindings": {
         "milestone": "id"
       }
+    },
+    "dashboard.termsAndConditions": {
+      "uri": "terms-and-conditions",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.updatetermsAndConditions": {
+      "uri": "update-terms-and-conditions",
+      "methods": ["POST"]
+    },
+    "dashboard.updatePrivacyPolicy": {
+      "uri": "update-privacy-policy",
+      "methods": ["POST"]
     },
     "dashboard.administrator.authentication-logs.index": {
       "uri": "administrator\/authentication-logs",

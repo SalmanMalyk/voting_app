@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AppController;
-use App\Http\Controllers\Module\UserController;
-use App\Http\Controllers\General\MilestoneController;
 use App\Http\Controllers\Analytics\DashboardReportController;
+use App\Http\Controllers\AppController;
+use App\Http\Controllers\General\MilestoneController;
+use App\Http\Controllers\General\ParameterController;
+use App\Http\Controllers\Module\UserController;
+use Illuminate\Support\Facades\Route;
 
 
 // AUTHENTICATED ROUTES
@@ -48,6 +49,14 @@ Route::group(['middleware' => 'auth:sanctum', 'as' => 'dashboard.'], function ()
 
 	/* --------------- Milestone -------------------- */
 	Route::resource('milestone', MilestoneController::class);
+
+	/* --------------- Terms And Conditions -------------------- */
+	Route::get('/terms-and-conditions', [ParameterController::class, 'termsAndConditions'])->name('termsAndConditions');
+	Route::post('/update-terms-and-conditions', [ParameterController::class, 'updatetermsAndConditions'])->name('updatetermsAndConditions');
+	
+	/* --------------- Privacy Policy -------------------- */
+	Route::get('/privacy-policy', [ParameterController::class, 'privacyPolicy'])->name('privacyPolicy');
+	Route::post('/update-privacy-policy', [ParameterController::class, 'updatePrivacyPolicy'])->name('updatePrivacyPolicy');
 
 	/* --------------- Master ROUTES -------------------- */
 	Route::group(['prefix' => 'administrator', 'as' => 'administrator.', 'title' => 'Administrator', 'namespace' => 'App\Http\Controllers\Administrator'], function () {

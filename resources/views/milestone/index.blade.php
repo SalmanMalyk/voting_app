@@ -18,7 +18,7 @@
 		<div class="row milestone">
 			
 			@foreach($milestones as $key => $milestone)
-			<div class="col-xl-4 card milestone-{{ $milestone->id }}">
+			<div class="col-xl-4  milestone-{{ $milestone->id }}">
 				<a class="block block-rounded block-link-shadow" href="javascript:void(0)">
 					<div class="block-content block-content-full ribbon ribbon-dark ribbon-modern ribbon-primary">
 						<div class="ribbon-box">
