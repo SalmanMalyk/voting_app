@@ -213,4 +213,8 @@ $(function () {
             "_self"
         );
     });
+
+    $("#createForm").on('submit', function (event) {
+        
+    })
 });

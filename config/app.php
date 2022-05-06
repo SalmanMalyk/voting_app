@@ -201,7 +201,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -241,10 +240,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Menu' => Harimayco\Menu\Facades\Menu::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Js' => Illuminate\Support\Js::class,
-        'Outreach' => App\Facade\Outreach\OutreachFacade::class,
     ],
 
 ];

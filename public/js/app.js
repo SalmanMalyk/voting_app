@@ -270,8 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Ziggy": () => (/* binding */ Ziggy)
 /* harmony export */ });
 var Ziggy = {
-  "url": "http:\/\/localhost:8000",
-  "port": 8000,
+  "url": "http:\/\/localhost:1000",
+  "port": 1000,
   "defaults": {},
   "routes": {
     "debugbar.openhandler": {
@@ -414,16 +414,9 @@ var Ziggy = {
       "uri": "user\/profile",
       "methods": ["GET", "HEAD"]
     },
-    "api-tokens.index": {
-      "uri": "user\/api-tokens",
-      "methods": ["GET", "HEAD"]
-    },
     "api.invoices": {
       "uri": "api\/v1\/invoices\/{invoice}\/update",
-      "methods": ["PATCH"],
-      "bindings": {
-        "invoice": "id"
-      }
+      "methods": ["PATCH"]
     },
     "api.customersdiscount.index": {
       "uri": "api\/get-customersdiscount-list",
@@ -479,24 +472,15 @@ var Ziggy = {
     },
     "api.customers.customerLedgerInfo": {
       "uri": "api\/customer-ledger-info\/{branch}",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "branch": "id"
-      }
+      "methods": ["GET", "HEAD"]
     },
     "api.invoices.getInvoiceDetails": {
       "uri": "api\/{invoice}\/get-invoice-details",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "invoice": "id"
-      }
+      "methods": ["GET", "HEAD"]
     },
     "api.invoices.updateInvoiceDetails": {
       "uri": "api\/{invoice}\/update-invoice-details",
-      "methods": ["POST"],
-      "bindings": {
-        "invoice": "id"
-      }
+      "methods": ["POST"]
     },
     "api.searchThroughAddress": {
       "uri": "api\/search-street-building",
@@ -504,10 +488,7 @@ var Ziggy = {
     },
     "api.invoices.existingInvoice": {
       "uri": "api\/{customerBranch}\/existing-invoice",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "customerBranch": "id"
-      }
+      "methods": ["GET", "HEAD"]
     },
     "api.getScheduleVehicles": {
       "uri": "api\/getScheduleVehicles",
@@ -515,200 +496,207 @@ var Ziggy = {
     },
     "api.getVehicleInfo": {
       "uri": "api\/{vehicle}\/getVehicleInfo",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "vehicle": "id"
-      }
+      "methods": ["GET", "HEAD"]
     },
     "api.getDeliveryScheduleInfo": {
       "uri": "api\/{scheduleDelivery}\/getDeliveryScheduleInfo",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "scheduleDelivery": "id"
-      }
+      "methods": ["GET", "HEAD"]
     },
     "api.getPaymentTypes": {
       "uri": "api\/getPaymentTypes",
       "methods": ["GET", "HEAD"]
     },
-    "api.dispatcher.login": {
-      "uri": "api\/v1\/dispatcher\/login",
-      "methods": ["POST"]
-    },
-    "api.dispatcher.": {
-      "uri": "api\/v1\/dispatcher\/get-customer",
-      "methods": ["POST"]
-    },
-    "api.customer.": {
-      "uri": "api\/v1\/customer\/recent-orders",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.index": {
+    "index": {
       "uri": "\/",
       "methods": ["GET", "HEAD"]
     },
+    "dashboard.loginView": {
+      "uri": "admin\/login",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.login": {
+      "uri": "admin\/login",
+      "methods": ["POST"]
+    },
+    "dashboard.logout": {
+      "uri": "admin\/logout",
+      "methods": ["POST"]
+    },
+    "dashboard.index": {
+      "uri": "admin",
+      "methods": ["GET", "HEAD"]
+    },
     "dashboard.": {
-      "uri": "markAsRead",
+      "uri": "admin\/logs",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.getModelAudits": {
-      "uri": "audits",
+      "uri": "admin\/audits",
       "methods": ["POST"]
     },
     "dashboard.password.update": {
-      "uri": "update-user-password",
-      "methods": ["POST"]
-    },
-    "dashboard.fetch-notifications": {
-      "uri": "fetch-notifications",
+      "uri": "admin\/update-user-password",
       "methods": ["POST"]
     },
     "dashboard.users.adminUser": {
-      "uri": "users\/admin",
+      "uri": "admin\/users\/admins",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.users.updateStatus": {
-      "uri": "users\/update-status",
+      "uri": "admin\/users\/update-status",
       "methods": ["PATCH"]
     },
     "dashboard.users.index": {
-      "uri": "users",
+      "uri": "admin\/users",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.users.create": {
-      "uri": "users\/create",
+      "uri": "admin\/users\/create",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.users.store": {
-      "uri": "users",
+      "uri": "admin\/users",
       "methods": ["POST"]
     },
     "dashboard.users.show": {
-      "uri": "users\/{user}",
+      "uri": "admin\/users\/{user}",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.users.edit": {
-      "uri": "users\/{user}\/edit",
+      "uri": "admin\/users\/{user}\/edit",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.users.update": {
-      "uri": "users\/{user}",
+      "uri": "admin\/users\/{user}",
       "methods": ["PUT", "PATCH"]
     },
     "dashboard.users.destroy": {
-      "uri": "users\/{user}",
+      "uri": "admin\/users\/{user}",
       "methods": ["DELETE"],
       "bindings": {
         "user": "id"
       }
     },
     "dashboard.config.menu_builder": {
-      "uri": "general-configuration\/menu-builder",
+      "uri": "admin\/general-configuration\/menu-builder",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.config.roles.index": {
-      "uri": "general-configuration\/roles",
+      "uri": "admin\/general-configuration\/roles",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.config.roles.create": {
-      "uri": "general-configuration\/roles\/create",
+      "uri": "admin\/general-configuration\/roles\/create",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.config.roles.store": {
-      "uri": "general-configuration\/roles",
+      "uri": "admin\/general-configuration\/roles",
       "methods": ["POST"]
     },
     "dashboard.config.roles.show": {
-      "uri": "general-configuration\/roles\/{role}",
+      "uri": "admin\/general-configuration\/roles\/{role}",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.config.roles.edit": {
-      "uri": "general-configuration\/roles\/{role}\/edit",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "role": "id"
-      }
+      "uri": "admin\/general-configuration\/roles\/{role}\/edit",
+      "methods": ["GET", "HEAD"]
     },
     "dashboard.config.roles.update": {
-      "uri": "general-configuration\/roles\/{role}",
-      "methods": ["PUT", "PATCH"],
-      "bindings": {
-        "role": "id"
-      }
+      "uri": "admin\/general-configuration\/roles\/{role}",
+      "methods": ["PUT", "PATCH"]
     },
     "dashboard.config.roles.destroy": {
-      "uri": "general-configuration\/roles\/{role}",
-      "methods": ["DELETE"],
-      "bindings": {
-        "role": "id"
-      }
+      "uri": "admin\/general-configuration\/roles\/{role}",
+      "methods": ["DELETE"]
     },
     "dashboard.config.permissions.index": {
-      "uri": "general-configuration\/permissions",
+      "uri": "admin\/general-configuration\/permissions",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.config.permissions.create": {
-      "uri": "general-configuration\/permissions\/create",
+      "uri": "admin\/general-configuration\/permissions\/create",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.config.permissions.store": {
-      "uri": "general-configuration\/permissions",
+      "uri": "admin\/general-configuration\/permissions",
       "methods": ["POST"]
     },
     "dashboard.config.permissions.show": {
-      "uri": "general-configuration\/permissions\/{permission}",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "permission": "id"
-      }
+      "uri": "admin\/general-configuration\/permissions\/{permission}",
+      "methods": ["GET", "HEAD"]
     },
     "dashboard.config.permissions.edit": {
-      "uri": "general-configuration\/permissions\/{permission}\/edit",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "permission": "id"
-      }
+      "uri": "admin\/general-configuration\/permissions\/{permission}\/edit",
+      "methods": ["GET", "HEAD"]
     },
     "dashboard.config.permissions.update": {
-      "uri": "general-configuration\/permissions\/{permission}",
-      "methods": ["PUT", "PATCH"],
-      "bindings": {
-        "permission": "id"
-      }
+      "uri": "admin\/general-configuration\/permissions\/{permission}",
+      "methods": ["PUT", "PATCH"]
     },
     "dashboard.config.permissions.destroy": {
-      "uri": "general-configuration\/permissions\/{permission}",
+      "uri": "admin\/general-configuration\/permissions\/{permission}",
+      "methods": ["DELETE"]
+    },
+    "dashboard.milestone.index": {
+      "uri": "admin\/milestone",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.milestone.create": {
+      "uri": "admin\/milestone\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.milestone.store": {
+      "uri": "admin\/milestone",
+      "methods": ["POST"]
+    },
+    "dashboard.milestone.show": {
+      "uri": "admin\/milestone\/{milestone}",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.milestone.edit": {
+      "uri": "admin\/milestone\/{milestone}\/edit",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.milestone.update": {
+      "uri": "admin\/milestone\/{milestone}",
+      "methods": ["PUT", "PATCH"],
+      "bindings": {
+        "milestone": "id"
+      }
+    },
+    "dashboard.milestone.destroy": {
+      "uri": "admin\/milestone\/{milestone}",
       "methods": ["DELETE"],
       "bindings": {
-        "permission": "id"
+        "milestone": "id"
       }
     },
     "dashboard.administrator.authentication-logs.index": {
-      "uri": "administrator\/authentication-logs",
+      "uri": "admin\/administrator\/authentication-logs",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.administrator.authentication-logs.create": {
-      "uri": "administrator\/authentication-logs\/create",
+      "uri": "admin\/administrator\/authentication-logs\/create",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.administrator.authentication-logs.store": {
-      "uri": "administrator\/authentication-logs",
+      "uri": "admin\/administrator\/authentication-logs",
       "methods": ["POST"]
     },
     "dashboard.administrator.authentication-logs.show": {
-      "uri": "administrator\/authentication-logs\/{authentication_log}",
+      "uri": "admin\/administrator\/authentication-logs\/{authentication_log}",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.administrator.authentication-logs.edit": {
-      "uri": "administrator\/authentication-logs\/{authentication_log}\/edit",
+      "uri": "admin\/administrator\/authentication-logs\/{authentication_log}\/edit",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.administrator.authentication-logs.update": {
-      "uri": "administrator\/authentication-logs\/{authentication_log}",
+      "uri": "admin\/administrator\/authentication-logs\/{authentication_log}",
       "methods": ["PUT", "PATCH"]
     },
     "dashboard.administrator.authentication-logs.destroy": {
-      "uri": "administrator\/authentication-logs\/{authentication_log}",
+      "uri": "admin\/administrator\/authentication-logs\/{authentication_log}",
       "methods": ["DELETE"]
     }
   }
@@ -1203,7 +1191,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
       return n.length ? this.template.replace(/{([^}?]+)(\??)}/g, function (e, o, i) {
         var u, f, a;
         if (!i && [null, void 0].includes(t[o])) throw new Error("Ziggy error: '" + o + "' parameter is required for route '" + r.name + "'.");
-        if (n[n.length - 1].name === o && ".*" === r.wheres[o]) return encodeURIComponent(null != (a = t[o]) ? a : "").replaceAll("%2F", "/");
+        if (n[n.length - 1].name === o && ".*" === r.wheres[o]) return encodeURIComponent(null != (a = t[o]) ? a : "").replace(/%2F/g, "/");
         if (r.wheres[o] && !new RegExp("^" + (i ? "(" + r.wheres[o] + ")?" : r.wheres[o]) + "$").test(null != (u = t[o]) ? u : "")) throw new Error("Ziggy error: '" + o + "' parameter does not match required format '" + r.wheres[o] + "' for route '" + r.name + "'.");
         return encodeURIComponent(null != (f = t[o]) ? f : "");
       }).replace(/\/+$/, "") : this.template;

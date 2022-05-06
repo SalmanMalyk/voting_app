@@ -29,6 +29,16 @@
                 <input type="password_confirmation" class="form-control form-control-sm form-control-alt"
                     id="password_confirmation" name="email" placeholder="********" required />
             </div>
+            
+            <div class="mb-2 col-md-12">
+                <label for="role_id" class="font-size-sm mb-1">Select Role:<span class="text-danger">*</span></label>
+                {!! Form::select('role_id', $roles, null, [
+                    'class' => 'form-control form-control-sm form-control-alt',
+                    'placeholder' => 'Select Admin Role',
+                    'id' => 'role_id',
+                    'required' => true
+                ]) !!}
+            </div>
         </div>
     </form>
 

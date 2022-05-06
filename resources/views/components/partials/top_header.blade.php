@@ -43,7 +43,7 @@
                         </a>
 
                         <div role="separator" class="dropdown-divider"></div>
-                        <form action="{{ route('logout') }}" method="post">
+                        <form action="{{ route('dashboard.logout') }}" method="post">
                             @csrf
                             <button type="submit" class="dropdown-item">
                                 <i class="far fa-fw fa-arrow-alt-circle-left mr-1"></i> {{ __('Sign Out') }}

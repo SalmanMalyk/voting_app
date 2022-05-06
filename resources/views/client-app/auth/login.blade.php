@@ -18,15 +18,12 @@
                     @if (session('status'))
                     <div class="alert alert-danger alert-dismissable" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">×</span>
                         </button>
-                        <p class="mb-0">
-                            <i class="fas fa-exclamation-circle fa-fw mr-1"></i>
-                            {{ session('status') }}
-                        </p>
+                        <p class="mb-0">{{ session('status') }}</p>
                     </div>
                     @endif
-                    <form class="js-validation-signin" action="{{ route('dashboard.login') }}" method="POST">
+                    <form class="js-validation-signin" action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <div class="input-group">
@@ -55,6 +52,11 @@
                                 <input type="checkbox" class="custom-control-input" id="login-remember-me" name="remember">
                                 <label class="custom-control-label" for="login-remember-me">Remember Me</label>
                             </div>
+                            @if (Route::has('password.request'))
+                                <div class="font-w600 font-size-sm py-1">
+                                    <a href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-hero-primary">

@@ -143,13 +143,11 @@ use Yadahan\AuthenticationLog\AuthenticationLogable;
  * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements Auditable
+class User extends Authenticatable
 {
-    use \OwenIt\Auditing\Auditable, HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, HasRoles, SoftDeletes, AuthenticationLogable;
+    use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, HasRoles, SoftDeletes, AuthenticationLogable;
 
     protected $guard_name = 'sanctum';
-
-    protected $workflow_id = '5';
 
     /**
      * The attributes that are mass assignable.
@@ -179,33 +177,8 @@ class User extends Authenticatable implements Auditable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'profile_photo_url',
-    ];
-
-
     public function scopeWithoutAdmin(Builder $builder)
     {
         return $builder->whereHas("roles", function($q){ $q->whereNotIn("name", ["Super Admin"]); });
-    }
-
-
-    /**
-     * Get the default profile photo URL if no profile photo has been uploaded.
-     *
-     * @return string
-     */
-    protected function defaultProfilePhotoUrl()
-    {
-        $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
-            return mb_substr($segment, 0, 1);
-        })->join(' '));
-
-        return 'https://ui-avatars.com/api/?name=' . urlencode($name);
     }
 }

@@ -31,6 +31,22 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $methods = [
+            'loginView' => 'login',
+            'registerView' => 'register',
+            'twoFactorChallengeView' => 'two-factor-challenge',
+            'resetPasswordView' => 'reset-password',
+            'verifyEmailView' => 'verify-email',
+            'confirmPasswordView' => 'confirm-password',
+            'requestPasswordResetLinkView' => 'forgot-password',
+            'resetPasswordView' => 'reset-password',
+        ];
+
+        foreach ($methods as $method => $view) {
+            Fortify::$method(fn () => view("client-app.auth.$view"));
+        }
+        
+        
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);

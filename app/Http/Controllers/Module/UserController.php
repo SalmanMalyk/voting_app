@@ -110,6 +110,33 @@ class UserController extends Controller
         ]);
     }
 
+    public function createAdmin(Request $request)
+    {
+        $user = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
+
+        $user['name'] = ucfirst($request->first_name . ' ' . $request->last_name);
+        $user['password'] = Hash::make($request->password);
+        unset($user['role_id']);
+
+        // Create User
+        $newUser = User::create($user);
+
+        // TODO: Assigning Role
+        if ($newUser) {
+            logger('Assigning Role:', [$newUser]);
+            $newUser->assignRole(Role::find($request->role_id));
+        }
+
+
+        return redirect()->route($this->route . '.index')->with('success', 'User Created Successfully.');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
