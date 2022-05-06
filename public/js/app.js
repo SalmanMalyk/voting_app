@@ -548,16 +548,8 @@ var Ziggy = {
       "methods": ["GET", "HEAD"]
     },
     "dashboard.": {
-      "uri": "users\/active-users",
+      "uri": "markAsRead",
       "methods": ["GET", "HEAD"]
-    },
-    "dashboard.analytics.getSchedulePlanAnalytics": {
-      "uri": "analytics\/schedule-plan-analytics",
-      "methods": ["POST"]
-    },
-    "dashboard.analytics.getQuickAnalytics": {
-      "uri": "analytics\/quick-analytics",
-      "methods": ["POST"]
     },
     "dashboard.getModelAudits": {
       "uri": "audits",
@@ -571,8 +563,8 @@ var Ziggy = {
       "uri": "fetch-notifications",
       "methods": ["POST"]
     },
-    "dashboard.users.activityLogs": {
-      "uri": "users\/{hash}\/activity-logs",
+    "dashboard.users.adminUser": {
+      "uri": "users\/admin",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.users.updateStatus": {
