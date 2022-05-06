@@ -270,8 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Ziggy": () => (/* binding */ Ziggy)
 /* harmony export */ });
 var Ziggy = {
-  "url": "http:\/\/localhost:8000",
-  "port": 8000,
+  "url": "http:\/\/localhost",
+  "port": null,
   "defaults": {},
   "routes": {
     "debugbar.openhandler": {
@@ -605,10 +605,7 @@ var Ziggy = {
     },
     "dashboard.users.destroy": {
       "uri": "users\/{user}",
-      "methods": ["DELETE"],
-      "bindings": {
-        "user": "id"
-      }
+      "methods": ["DELETE"]
     },
     "dashboard.config.menu_builder": {
       "uri": "general-configuration\/menu-builder",
@@ -689,6 +686,40 @@ var Ziggy = {
       "methods": ["DELETE"],
       "bindings": {
         "permission": "id"
+      }
+    },
+    "dashboard.milestone.index": {
+      "uri": "milestone",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.milestone.create": {
+      "uri": "milestone\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.milestone.store": {
+      "uri": "milestone",
+      "methods": ["POST"]
+    },
+    "dashboard.milestone.show": {
+      "uri": "milestone\/{milestone}",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.milestone.edit": {
+      "uri": "milestone\/{milestone}\/edit",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.milestone.update": {
+      "uri": "milestone\/{milestone}",
+      "methods": ["PUT", "PATCH"],
+      "bindings": {
+        "milestone": "id"
+      }
+    },
+    "dashboard.milestone.destroy": {
+      "uri": "milestone\/{milestone}",
+      "methods": ["DELETE"],
+      "bindings": {
+        "milestone": "id"
       }
     },
     "dashboard.administrator.authentication-logs.index": {
@@ -1211,7 +1242,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
       return n.length ? this.template.replace(/{([^}?]+)(\??)}/g, function (e, o, i) {
         var u, f, a;
         if (!i && [null, void 0].includes(t[o])) throw new Error("Ziggy error: '" + o + "' parameter is required for route '" + r.name + "'.");
-        if (n[n.length - 1].name === o && ".*" === r.wheres[o]) return encodeURIComponent(null != (a = t[o]) ? a : "").replaceAll("%2F", "/");
+        if (n[n.length - 1].name === o && ".*" === r.wheres[o]) return encodeURIComponent(null != (a = t[o]) ? a : "").replace(/%2F/g, "/");
         if (r.wheres[o] && !new RegExp("^" + (i ? "(" + r.wheres[o] + ")?" : r.wheres[o]) + "$").test(null != (u = t[o]) ? u : "")) throw new Error("Ziggy error: '" + o + "' parameter does not match required format '" + r.wheres[o] + "' for route '" + r.name + "'.");
         return encodeURIComponent(null != (f = t[o]) ? f : "");
       }).replace(/\/+$/, "") : this.template;

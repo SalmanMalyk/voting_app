@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\Module\UserController;
+use App\Http\Controllers\General\MilestoneController;
 use App\Http\Controllers\Analytics\DashboardReportController;
 
 // AUTHENTICATED ROUTES
@@ -52,6 +53,9 @@ Route::group(['middleware' => 'auth:sanctum', 'as' => 'dashboard.'], function ()
 		/* --------------- Permissions -------------------- */
 		Route::resource('permissions', PermissionController::class);
 	});
+
+	/* --------------- Milestone -------------------- */
+	Route::resource('milestone', MilestoneController::class);
 
 	/* --------------- Master ROUTES -------------------- */
 	Route::group(['prefix' => 'administrator', 'as' => 'administrator.', 'title' => 'Administrator', 'namespace' => 'App\Http\Controllers\Administrator'], function () {
