@@ -33,7 +33,7 @@
 								{{ $milestone->title }}
 							</p>
 							<p class="text-muted mb-0">
-								<strong>Reward</strong> {{ $milestone->reward }} $
+								<strong>Reward</strong> ${{ $milestone->reward }} 
 							</p>
 							<p class="fs-sm fw-bold text-muted mb-0">
 								<strong>Vote Count</strong> {{ $milestone->vote_count }}
