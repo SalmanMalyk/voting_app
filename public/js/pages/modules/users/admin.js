@@ -1,4 +1,4 @@
-var path = "dashboard.users";
+var path = "dashboard.users.admin";
 
 $(function () {
     "use strict";
@@ -17,7 +17,7 @@ $(function () {
         order: [[1, "desc"]],
         colReorder: true,
         select: true,
-        ajax: route(`${path}.adminUser`),
+        ajax: route(`${path}.index`),
         fixedHeader: {
             header: true,
             headerOffset: $(".content-header").height() - 8,
@@ -173,7 +173,7 @@ $(function () {
     });
 
     // update status when clicked
-
+    path;
     $("table tbody").on("dblclick", ".x-btn-update", (e) => {
         e.preventDefault();
         Dashmix.block("state_loading", ".siteBlock");
@@ -214,7 +214,43 @@ $(function () {
         );
     });
 
-    $("#createForm").on('submit', function (event) {
-        
-    })
+    $("#createForm").on("submit", function (event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        Swal2.fire({
+            icon: "question",
+            title: "Confirm",
+            html: "Are you sure to create new admin?",
+            confirmButtonText: "Continue",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#2ecc71",
+            cancelButtonColor: "#d33",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            backdrop: true,
+            showLoaderOnConfirm: true,
+            allowOutsideClick: () => !Swal2.isLoading(),
+            preConfirm: async () => {
+                await axios
+                    .post(route(`${path}.store`), formData)
+                    .then(({ data }) => {
+                        $("#createModal").trigger("reset");
+                        return data;
+                    })
+                    .catch((error) => {
+                        if (error.response.status == 422) {
+                            let messages = "";
+                            $.each(error.response.data.errors, (k, v) => {
+                                messages += `${v[0]} <br>`;
+                            });
+                            Swal2.showValidationMessage(`${messages}`);
+                        } else {
+                            Swal2.showValidationMessage(
+                                `Request failed: ${error}`
+                            );
+                        }
+                    });
+            },
+        });
+    });
 });

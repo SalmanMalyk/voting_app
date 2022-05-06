@@ -270,8 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Ziggy": () => (/* binding */ Ziggy)
 /* harmony export */ });
 var Ziggy = {
-  "url": "http:\/\/localhost:1000",
-  "port": 1000,
+  "url": "http:\/\/localhost:8000",
+  "port": 8000,
   "defaults": {},
   "routes": {
     "debugbar.openhandler": {
@@ -538,44 +538,65 @@ var Ziggy = {
       "uri": "admin\/update-user-password",
       "methods": ["POST"]
     },
-    "dashboard.users.adminUser": {
-      "uri": "admin\/users\/admins",
+    "dashboard.users.admin.index": {
+      "uri": "admin\/users\/admin",
       "methods": ["GET", "HEAD"]
+    },
+    "dashboard.users.admin.create": {
+      "uri": "admin\/users\/admin\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.users.admin.store": {
+      "uri": "admin\/users\/admin",
+      "methods": ["POST"]
+    },
+    "dashboard.users.admin.show": {
+      "uri": "admin\/users\/admin\/{admin}",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.users.admin.edit": {
+      "uri": "admin\/users\/admin\/{admin}\/edit",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.users.admin.update": {
+      "uri": "admin\/users\/admin\/{admin}",
+      "methods": ["PUT", "PATCH"]
+    },
+    "dashboard.users.admin.destroy": {
+      "uri": "admin\/users\/admin\/{admin}",
+      "methods": ["DELETE"]
+    },
+    "dashboard.users.artist.index": {
+      "uri": "admin\/users\/artist",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.users.artist.create": {
+      "uri": "admin\/users\/artist\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.users.artist.store": {
+      "uri": "admin\/users\/artist",
+      "methods": ["POST"]
+    },
+    "dashboard.users.artist.show": {
+      "uri": "admin\/users\/artist\/{artist}",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.users.artist.edit": {
+      "uri": "admin\/users\/artist\/{artist}\/edit",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.users.artist.update": {
+      "uri": "admin\/users\/artist\/{artist}",
+      "methods": ["PUT", "PATCH"]
+    },
+    "dashboard.users.artist.destroy": {
+      "uri": "admin\/users\/artist\/{artist}",
+      "methods": ["DELETE"]
     },
     "dashboard.users.updateStatus": {
       "uri": "admin\/users\/update-status",
       "methods": ["PATCH"]
-    },
-    "dashboard.users.index": {
-      "uri": "admin\/users",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.users.create": {
-      "uri": "admin\/users\/create",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.users.store": {
-      "uri": "admin\/users",
-      "methods": ["POST"]
-    },
-    "dashboard.users.show": {
-      "uri": "admin\/users\/{user}",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.users.edit": {
-      "uri": "admin\/users\/{user}\/edit",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.users.update": {
-      "uri": "admin\/users\/{user}",
-      "methods": ["PUT", "PATCH"]
-    },
-    "dashboard.users.destroy": {
-      "uri": "admin\/users\/{user}",
-      "methods": ["DELETE"],
-      "bindings": {
-        "user": "id"
-      }
     },
     "dashboard.config.menu_builder": {
       "uri": "admin\/general-configuration\/menu-builder",
@@ -599,15 +620,24 @@ var Ziggy = {
     },
     "dashboard.config.roles.edit": {
       "uri": "admin\/general-configuration\/roles\/{role}\/edit",
-      "methods": ["GET", "HEAD"]
+      "methods": ["GET", "HEAD"],
+      "bindings": {
+        "role": "id"
+      }
     },
     "dashboard.config.roles.update": {
       "uri": "admin\/general-configuration\/roles\/{role}",
-      "methods": ["PUT", "PATCH"]
+      "methods": ["PUT", "PATCH"],
+      "bindings": {
+        "role": "id"
+      }
     },
     "dashboard.config.roles.destroy": {
       "uri": "admin\/general-configuration\/roles\/{role}",
-      "methods": ["DELETE"]
+      "methods": ["DELETE"],
+      "bindings": {
+        "role": "id"
+      }
     },
     "dashboard.config.permissions.index": {
       "uri": "admin\/general-configuration\/permissions",
@@ -623,19 +653,31 @@ var Ziggy = {
     },
     "dashboard.config.permissions.show": {
       "uri": "admin\/general-configuration\/permissions\/{permission}",
-      "methods": ["GET", "HEAD"]
+      "methods": ["GET", "HEAD"],
+      "bindings": {
+        "permission": "id"
+      }
     },
     "dashboard.config.permissions.edit": {
       "uri": "admin\/general-configuration\/permissions\/{permission}\/edit",
-      "methods": ["GET", "HEAD"]
+      "methods": ["GET", "HEAD"],
+      "bindings": {
+        "permission": "id"
+      }
     },
     "dashboard.config.permissions.update": {
       "uri": "admin\/general-configuration\/permissions\/{permission}",
-      "methods": ["PUT", "PATCH"]
+      "methods": ["PUT", "PATCH"],
+      "bindings": {
+        "permission": "id"
+      }
     },
     "dashboard.config.permissions.destroy": {
       "uri": "admin\/general-configuration\/permissions\/{permission}",
-      "methods": ["DELETE"]
+      "methods": ["DELETE"],
+      "bindings": {
+        "permission": "id"
+      }
     },
     "dashboard.milestone.index": {
       "uri": "admin\/milestone",
@@ -670,6 +712,22 @@ var Ziggy = {
       "bindings": {
         "milestone": "id"
       }
+    },
+    "dashboard.termsAndConditions": {
+      "uri": "admin\/terms-and-conditions",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.updatetermsAndConditions": {
+      "uri": "admin\/update-terms-and-conditions",
+      "methods": ["POST"]
+    },
+    "dashboard.privacyPolicy": {
+      "uri": "admin\/privacy-policy",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.updatePrivacyPolicy": {
+      "uri": "admin\/update-privacy-policy",
+      "methods": ["POST"]
     },
     "dashboard.administrator.authentication-logs.index": {
       "uri": "admin\/administrator\/authentication-logs",

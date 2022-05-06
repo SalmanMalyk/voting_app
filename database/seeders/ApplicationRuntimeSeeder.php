@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\UserType;
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -34,21 +35,13 @@ class ApplicationRuntimeSeeder extends Seeder
                 'role' => 'Admin',
                 'type' => UserType::Admin,
             ],
-            [
-                'name' => 'User',
-                'email' => 'user@gmail.com',
-                'role' => 'User',
-                'type' => UserType::User,
-            ],
         ];
 
         foreach ($users as $user) {
             // CREATE ADMIN ACCOUNT
-            $new = User::create([
+            $new = Admin::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'email_verified_at' => now(),
-                'user_type' => $user['type'],
                 'password' => Hash::make('password'),
             ]);
 
@@ -56,11 +49,17 @@ class ApplicationRuntimeSeeder extends Seeder
             // Create Role
             $role = Role::create([
                 'name'  => $user['role'],
-                'guard_name' => 'sanctum',
+                'guard_name' => 'admin',
             ]);
 
             // assign role to user
             $new->assignRole($role->id);
         }
+
+        $user = User::create([
+            'name' => 'User',
+            'email' => 'user@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
     }
 }

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Module;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Admin;
 use App\Enums\UserType;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Actions\Admin\CreateAdmin;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -43,98 +45,6 @@ class UserController extends Controller
             'roles' => $roles,
             'users' => $users
         ]);
-    }
-
-    public function adminUser(Request $request, DataTables $dataTables)
-    {
-        if ($request->ajax() || $request->wantsJson()) {
-            $users = User::query()
-                ->where('user_type', UserType::Admin)
-                ->with('roles')
-                ->newQuery();
-
-            return $dataTables->eloquent($users)
-                ->addIndexColumn()
-                ->setRowId('id')
-                ->addColumn('role', function ($row) {
-                    return $row->roles->pluck('name')->implode(', ');
-                })
-                ->editColumn('status', function ($row) {
-                    return [
-                        'display' => $row->status ? '<i class="fas fa-check-circle text-success"></i> Active' : '<i class="fas fa-times-circle text-danger"></i> In Active',
-                        'status' => $row->status
-                    ];
-                })
-                ->editColumn('created_at', function ($row) {
-                    return [
-                        'display' => $row->created_at->format('d, M-Y'),
-                        'timestamp'  => $row->created_at->timestamp
-                    ];
-                })
-                ->addColumn('action', function ($row) {
-                    $btn = '
-                        <div class="dropdown">
-                        <button type="button" class="btn btn-link" id="dropdown-default-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdown-default-primary">
-                        ';
-                    if (auth()->user()->can('edit_schedule_blocks')) {
-                        $btn .= '
-                            <a href="javascript:void(0)" class="dropdown-item mb-0 font-sm" onclick="deliverySchedule(' . $row->id . ')">
-                                <i class="fas fa-edit mr-1 text-warning"></i> Edit
-                            </a>
-                        ';
-                    }
-
-                    $btn .= '
-                        </div>
-                        </div>
-                        ';
-
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->escapeColumns('aaData')
-                ->toJson();
-        }
-
-
-
-        $roles = Role::where('name', '!=', 'Super Admin')->pluck('name', 'id');
-        $users = User::with('roles')->withoutAdmin()->orderBy('name', 'asc')->get();
-
-        return view($this->path . 'admins/index', [
-            'roles' => $roles,
-            'users' => $users
-        ]);
-    }
-
-    public function createAdmin(Request $request)
-    {
-        $user = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
-            'role_id' => 'required|exists:roles,id',
-        ]);
-
-
-        $user['name'] = ucfirst($request->first_name . ' ' . $request->last_name);
-        $user['password'] = Hash::make($request->password);
-        unset($user['role_id']);
-
-        // Create User
-        $newUser = User::create($user);
-
-        // TODO: Assigning Role
-        if ($newUser) {
-            logger('Assigning Role:', [$newUser]);
-            $newUser->assignRole(Role::find($request->role_id));
-        }
-
-
-        return redirect()->route($this->route . '.index')->with('success', 'User Created Successfully.');
     }
 
     /**

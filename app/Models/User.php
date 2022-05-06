@@ -179,6 +179,8 @@ class User extends Authenticatable
 
     public function scopeWithoutAdmin(Builder $builder)
     {
-        return $builder->whereHas("roles", function($q){ $q->whereNotIn("name", ["Super Admin"]); });
+        return $builder->whereHas("roles", function ($q) {
+            $q->whereNotIn("name", ["Super Admin"]);
+        });
     }
 }

@@ -26,25 +26,26 @@
             <div class="mb-2 col-md-6">
                 <label for="password_confirmation" class="font-size-sm mb-1">Confirm Password:<span
                         class="text-danger">*</span></label>
-                <input type="password_confirmation" class="form-control form-control-sm form-control-alt"
-                    id="password_confirmation" name="email" placeholder="********" required />
+                <input class="form-control form-control-sm form-control-alt" id="password_confirmation" type="password"
+                    name="password_confirmation" placeholder="********" required />
             </div>
-            
+
             <div class="mb-2 col-md-12">
                 <label for="role_id" class="font-size-sm mb-1">Select Role:<span class="text-danger">*</span></label>
                 {!! Form::select('role_id', $roles, null, [
-                    'class' => 'form-control form-control-sm form-control-alt',
-                    'placeholder' => 'Select Admin Role',
-                    'id' => 'role_id',
-                    'required' => true
-                ]) !!}
+    'class' => 'form-control form-control-sm form-control-alt',
+    'placeholder' => 'Select Admin Role',
+    'id' => 'role_id',
+    'required' => true,
+]) !!}
             </div>
         </div>
     </form>
 
 
     <x-slot name="footer">
-        <button type="submit" class="btn btn-primary btn-sm rounded-0" form="roleForm"><i class="fas fa-plus mr-1"></i>
+        <button type="submit" class="btn btn-primary btn-sm rounded-0" form="createForm"><i
+                class="fas fa-plus mr-1"></i>
             Create Admin</button>
     </x-slot>
 
