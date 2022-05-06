@@ -6,16 +6,11 @@ use App\Http\Controllers\Module\UserController;
 use App\Http\Controllers\General\MilestoneController;
 use App\Http\Controllers\Analytics\DashboardReportController;
 
+
 // AUTHENTICATED ROUTES
 Route::group(['middleware' => 'auth:sanctum', 'as' => 'dashboard.'], function () {
 	// SYSTEM ROUTES
 	Route::get('/', [AppController::class, 'index'])->name('index');
-	Route::view('/fallback', 'components.offline');
-
-	Route::group(['prefix' => 'analytics', 'as' => 'analytics.'], function () {
-		Route::post('/schedule-plan-analytics', [DashboardReportController::class, 'getSchedulePlanAnalytics'])->name('getSchedulePlanAnalytics');
-		Route::post('/quick-analytics', [DashboardReportController::class, 'getQuickAnalytics'])->name('getQuickAnalytics');
-	});
 
 	Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
@@ -34,10 +29,7 @@ Route::group(['middleware' => 'auth:sanctum', 'as' => 'dashboard.'], function ()
 	/* --------------- MODULES -------------------- */
 
 	/* --------------- USERS -------------------- */
-	// activity logs
-	Route::get('/users/{hash}/activity-logs', [UserController::class, 'activityLogs'])->name('users.activityLogs');
-	// user routes
-	Route::get('/users/active-users', [UserController::class, 'activeUsers']);
+	Route::get('/users/admin', [UserController::class, 'adminUser'])->name('users.adminUser');
 	Route::patch('/users/update-status', [UserController::class, 'updateStatus'])->name('users.updateStatus');
 	Route::resource('users', UserController::class);
 

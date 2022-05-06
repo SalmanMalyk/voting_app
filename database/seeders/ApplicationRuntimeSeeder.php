@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+use function PHPSTORM_META\map;
+
 class ApplicationRuntimeSeeder extends Seeder
 {
     /**
@@ -19,24 +21,46 @@ class ApplicationRuntimeSeeder extends Seeder
      */
     public function run()
     {
-        // CREATE ADMIN ACCOUNT
-        $user = User::create([
-            'name' => 'Super Admin',
-            'name' => 'Super Admin',
-            'email' => 'superadmin@gmail.com',
-            'email_verified_at' => now(),
-            'user_type' => UserType::SuperAdmin,
-            'password' => Hash::make('password'),
-        ]);
+        $users = [
+            [
+                'name' => 'Super Admin',
+                'email' => 'superadmin@gmail.com',
+                'role' => 'Super Admin',
+                'type' => UserType::SuperAdmin,
+            ],
+            [
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'role' => 'Admin',
+                'type' => UserType::Admin,
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@gmail.com',
+                'role' => 'User',
+                'type' => UserType::User,
+            ],
+        ];
+
+        foreach ($users as $user) {
+            // CREATE ADMIN ACCOUNT
+            $new = User::create([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'email_verified_at' => now(),
+                'user_type' => $user['type'],
+                'password' => Hash::make('password'),
+            ]);
 
 
-        // Create Role
-        $role = Role::create([
-            'name'  => 'Super Admin',
-            'guard_name' => 'sanctum',
-        ]);
+            // Create Role
+            $role = Role::create([
+                'name'  => $user['role'],
+                'guard_name' => 'sanctum',
+            ]);
 
-        // assign role to user
-        $user->assignRole($role->id);
+            // assign role to user
+            $new->assignRole($role->id);
+        }
     }
 }

@@ -270,8 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Ziggy": () => (/* binding */ Ziggy)
 /* harmony export */ });
 var Ziggy = {
-  "url": "http:\/\/localhost",
-  "port": null,
+  "url": "http:\/\/localhost:8000",
+  "port": 8000,
   "defaults": {},
   "routes": {
     "debugbar.openhandler": {
@@ -548,16 +548,8 @@ var Ziggy = {
       "methods": ["GET", "HEAD"]
     },
     "dashboard.": {
-      "uri": "users\/active-users",
+      "uri": "markAsRead",
       "methods": ["GET", "HEAD"]
-    },
-    "dashboard.analytics.getSchedulePlanAnalytics": {
-      "uri": "analytics\/schedule-plan-analytics",
-      "methods": ["POST"]
-    },
-    "dashboard.analytics.getQuickAnalytics": {
-      "uri": "analytics\/quick-analytics",
-      "methods": ["POST"]
     },
     "dashboard.getModelAudits": {
       "uri": "audits",
@@ -571,8 +563,8 @@ var Ziggy = {
       "uri": "fetch-notifications",
       "methods": ["POST"]
     },
-    "dashboard.users.activityLogs": {
-      "uri": "users\/{hash}\/activity-logs",
+    "dashboard.users.adminUser": {
+      "uri": "users\/admin",
       "methods": ["GET", "HEAD"]
     },
     "dashboard.users.updateStatus": {
@@ -605,7 +597,10 @@ var Ziggy = {
     },
     "dashboard.users.destroy": {
       "uri": "users\/{user}",
-      "methods": ["DELETE"]
+      "methods": ["DELETE"],
+      "bindings": {
+        "user": "id"
+      }
     },
     "dashboard.config.menu_builder": {
       "uri": "general-configuration\/menu-builder",

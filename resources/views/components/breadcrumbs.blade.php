@@ -1,4 +1,4 @@
-{{-- <div class="content mb-0 pt-3">
+<div class="content mb-0 pt-3">
     <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
         <h1 class="flex-sm-fill font-size-h3 font-w400 mt-2 mb-0 mb-sm-2">{{ $slot }}</h1>
         <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
@@ -20,7 +20,7 @@
         </nav>
     </div>
 </div>
---}}
+
 
 
 <x-saga.alerts />

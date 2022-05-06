@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('profile_photo_path')->nullable();
             $table->boolean('status')->default(true)->comment('Status of the user');
-            $table->enum('user_type', UserType::getValues())->default(UserType::User)->comment('Type of user');
+            $table->tinyInteger('user_type')->default(UserType::User)->comment('Type of user');
 
             $table->rememberToken();
             $table->softDeletes();
