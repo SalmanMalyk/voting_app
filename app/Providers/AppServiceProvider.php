@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,5 +36,10 @@ class AppServiceProvider extends ServiceProvider
         // Carbon\Carbon::setTestNow($knownDate);  
 
         Paginator::useBootstrap();
+
+        Builder::macro('clearout', function() {
+            return $this->where('name', '!=', 'Super Admin');
+        });
+
     }
 }

@@ -1,11 +1,11 @@
-<select name="{{ $name }}" id="{{ $name }}" {{ $attributes->class(['form-control select2']) }} style="width:100%" @isset($multiple) multiple="{{ $multiple }}" @endisset {{ $attributes }}></select>	
+<select name="{{ $name }}" id="{{ $id ?? $name }}" {{ $attributes->class(['form-control select2']) }} style="width:100%" @isset($multiple) multiple="{{ $multiple }}" @endisset {{ $attributes }}></select>	
 
 @push('script')
 	<script>
 		$(function() {
 			var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-			$('#{{ $name }}').select2({
+			$('#{{ $id ?? $name }}').select2({
 				placeholder: 'Select option',
 				allowClear: true,
 		        ajax: {

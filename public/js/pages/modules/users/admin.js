@@ -1,4 +1,5 @@
 var path = "dashboard.users.admin";
+var dataTable;
 
 $(function () {
     "use strict";
@@ -8,7 +9,7 @@ $(function () {
         .addClass("filters")
         .appendTo(".siteDataTable tfoot");
 
-    var dataTable = $(".siteDataTable").DataTable({
+    dataTable = $(".siteDataTable").DataTable({
         responsive: true,
         processing: true,
         serverSide: true,
@@ -51,8 +52,8 @@ $(function () {
                     var title = $(cell).text();
                     $(cell).html(
                         '<input type="text" class="form-control form-control-sm" placeholder="' +
-                            title +
-                            '" />'
+                        title +
+                        '" />'
                     );
 
                     // On every keypress in this input
@@ -76,9 +77,9 @@ $(function () {
                                 .search(
                                     this.value != ""
                                         ? regexr.replace(
-                                              "{search}",
-                                              "(((" + this.value + ")))"
-                                          )
+                                            "{search}",
+                                            "(((" + this.value + ")))"
+                                        )
                                         : "",
                                     this.value != "",
                                     this.value == ""
@@ -234,7 +235,60 @@ $(function () {
                 await axios
                     .post(route(`${path}.store`), formData)
                     .then(({ data }) => {
-                        $("#createModal").trigger("reset");
+                        $("#createModal").modal("toggle");
+                        $("#createForm").trigger('reset');
+                        $(".siteDataTable").DataTable().ajax.reload(null, false);
+                        Toast.fire({
+                            icon: "success",
+                            title: data.message
+                        })
+                        return data;
+                    })
+                    .catch((error) => {
+                        if (error.response.status == 422) {
+                            let messages = "";
+                            $.each(error.response.data.errors, (k, v) => {
+                                messages += `${v[0]} <br>`;
+                            });
+                            Swal2.showValidationMessage(`${messages}`);
+                        } else {
+                            Swal2.showValidationMessage(
+                                `Request failed: ${error}`
+                            );
+                        }
+                    });
+            },
+        });
+    });
+
+    $("#editForm").on("submit", function (event) {
+        event.preventDefault();
+        var formData = new FormData(this),
+            id = $(event.target).attr('data-id');
+        Swal2.fire({
+            icon: "question",
+            title: "Confirm",
+            html: "Are you sure to update admin?",
+            confirmButtonText: "Continue",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#2ecc71",
+            cancelButtonColor: "#d33",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            backdrop: true,
+            showLoaderOnConfirm: true,
+            allowOutsideClick: () => !Swal2.isLoading(),
+            preConfirm: async () => {
+                await axios
+                    .post(route(`${path}.update`, id), formData)
+                    .then(({ data }) => {
+                        $("#editModal").modal("toggle");
+                        $("#editForm").trigger('reset');
+                        $(".siteDataTable").DataTable().ajax.reload(null, false);
+                        Toast.fire({
+                            icon: "success",
+                            title: data.message
+                        })
                         return data;
                     })
                     .catch((error) => {
@@ -254,3 +308,66 @@ $(function () {
         });
     });
 });
+
+
+const edit = async (admin) => {
+    event.preventDefault();
+
+    let data = dataTable.row(`tr#${admin}`).data(),
+        popup = $('#editModal');
+
+    $('#editForm').attr('data-id', admin)
+
+    for (const item in data) {
+        if (item == 'role') {
+            popup.find(`.modal-body .form-control[name="role_id"]`).append(new Option(data[item], data['roles'][0].id, true, true)).trigger('change')
+        } else {
+            popup.find(`.modal-body .form-control[name="${item}"]`).val(data[item])
+        }
+
+    }
+    popup.modal('toggle')
+}
+
+
+const deleteAdmin = async (admin) => {
+    Swal2.fire({
+        icon: "question",
+        title: "Confirm",
+        html: "Are you sure to delete admin?",
+        confirmButtonText: "Continue",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#2ecc71",
+        cancelButtonColor: "#d33",
+        showCancelButton: true,
+        allowOutsideClick: false,
+        backdrop: true,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: () => !Swal2.isLoading(),
+        preConfirm: async () => {
+            await axios
+                .delete(route(`${path}.destroy`, admin))
+                .then(({ data }) => {
+                    $(".siteDataTable").DataTable().ajax.reload(null, false);
+                    Toast.fire({
+                        icon: "success",
+                        title: data.message
+                    })
+                    return data;
+                })
+                .catch((error) => {
+                    if (error.response.status == 422) {
+                        let messages = "";
+                        $.each(error.response.data.errors, (k, v) => {
+                            messages += `${v[0]} <br>`;
+                        });
+                        Swal2.showValidationMessage(`${messages}`);
+                    } else {
+                        Swal2.showValidationMessage(
+                            `Request failed: ${error}`
+                        );
+                    }
+                });
+        },
+    });
+}

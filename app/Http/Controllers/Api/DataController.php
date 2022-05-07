@@ -3,24 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
-use App\Models\Master\Town;
-use App\Models\Master\Zone;
-use App\Models\Master\Block;
 use Illuminate\Http\Request;
-use App\Models\Master\Vehicle;
 use Illuminate\Support\Collection;
-use App\Models\Master\CustomerType;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use App\Models\Master\MembershipType;
 use Illuminate\Support\Facades\Cache;
-use App\Models\Module\Product\Product;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Module\Customer\CustomerBranch;
-use App\Models\Module\Payment\PaymentType;
-use App\Models\Reports\SchedulDelivery\ScheduleDelivery;
 
 class DataController extends Controller
 {
+    public function getRoleName(Request $request)
+    {
+        return Role::query()
+                    ->clearout()
+                    ->where('name', 'LIKE', "%$request->q%")
+                    ->pluck('name', 'id');
+    }
+
     public function getUsersByParam(Request $request, Role $role)
     {
     	return $role->pluck('name', 'id');
