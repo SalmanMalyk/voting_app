@@ -27,6 +27,13 @@ class MilestoneController extends Controller
         return view($this->path.'index',compact('milestones')); 
     }
 
+    public function show()
+    {
+        $milestones = Milestone::latest()->paginate(9);
+
+        return view('milestone.view', compact('milestones'))->render();
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -51,6 +58,11 @@ class MilestoneController extends Controller
 
     }
 
+    public function edit(Milestone $milestone)
+    {
+        return response()->json(['milestone'=> $milestone ,200]);
+    }
+
     public function update(Request $request, Milestone $milestone)
     {
         request()->validate([
@@ -60,10 +72,18 @@ class MilestoneController extends Controller
             'days'		 	=> 'required|integer',
         ]);
     
-        $milestone->update($request->all());
+        $milestone->update([
+            'title'         => $request->title,
+            'reward'        => $request->reward,
+            'vote_count'    => $request->vote_count,
+            'days'          => $request->days,
+            'status'        => $request->status ?? false
+        ]);
     
-        return redirect()->route('milestone.index')
-                        ->with('message','Milestone updated successfully');
+       return response()->json(['message'      => 'Milestone updated successfully.',
+                                 'milestone'    => $milestone,
+                                 'success'      => true,
+                                 200]);
     }
 
     public function destroy(Milestone $milestone)

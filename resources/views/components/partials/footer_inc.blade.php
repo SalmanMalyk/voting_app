@@ -17,7 +17,6 @@
         </script>
         {{-- PAGE LEVEL MODALS --}}
         @stack('modals')
-        <x-saga.audits />
         {{-- change password modal --}}
         @auth
             @include('auth.change-password')

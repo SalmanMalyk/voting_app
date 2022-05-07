@@ -270,8 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Ziggy": () => (/* binding */ Ziggy)
 /* harmony export */ });
 var Ziggy = {
-  "url": "http:\/\/localhost:1000",
-  "port": 1000,
+  "url": "http:\/\/localhost:8001",
+  "port": 8001,
   "defaults": {},
   "routes": {
     "debugbar.openhandler": {
@@ -679,54 +679,85 @@ var Ziggy = {
         "permission": "id"
       }
     },
-    "dashboard.milestone.index": {
-      "uri": "admin\/milestone",
+    "dashboard.config.milestone.index": {
+      "uri": "admin\/general-configuration\/milestone",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.milestone.create": {
-      "uri": "admin\/milestone\/create",
+    "dashboard.config.milestone.create": {
+      "uri": "admin\/general-configuration\/milestone\/create",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.milestone.store": {
-      "uri": "admin\/milestone",
+    "dashboard.config.milestone.store": {
+      "uri": "admin\/general-configuration\/milestone",
       "methods": ["POST"]
     },
-    "dashboard.milestone.show": {
-      "uri": "admin\/milestone\/{milestone}",
+    "dashboard.config.milestone.show": {
+      "uri": "admin\/general-configuration\/milestone\/{milestone}",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.milestone.edit": {
-      "uri": "admin\/milestone\/{milestone}\/edit",
-      "methods": ["GET", "HEAD"]
+    "dashboard.config.milestone.edit": {
+      "uri": "admin\/general-configuration\/milestone\/{milestone}\/edit",
+      "methods": ["GET", "HEAD"],
+      "bindings": {
+        "milestone": "id"
+      }
     },
-    "dashboard.milestone.update": {
-      "uri": "admin\/milestone\/{milestone}",
+    "dashboard.config.milestone.update": {
+      "uri": "admin\/general-configuration\/milestone\/{milestone}",
       "methods": ["PUT", "PATCH"],
       "bindings": {
         "milestone": "id"
       }
     },
-    "dashboard.milestone.destroy": {
-      "uri": "admin\/milestone\/{milestone}",
+    "dashboard.config.milestone.destroy": {
+      "uri": "admin\/general-configuration\/milestone\/{milestone}",
       "methods": ["DELETE"],
       "bindings": {
         "milestone": "id"
       }
     },
-    "dashboard.termsAndConditions": {
-      "uri": "admin\/terms-and-conditions",
+    "dashboard.config.promotion.index": {
+      "uri": "admin\/general-configuration\/promotion",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.updatetermsAndConditions": {
-      "uri": "admin\/update-terms-and-conditions",
+    "dashboard.config.promotion.create": {
+      "uri": "admin\/general-configuration\/promotion\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.config.promotion.store": {
+      "uri": "admin\/general-configuration\/promotion",
       "methods": ["POST"]
     },
-    "dashboard.privacyPolicy": {
-      "uri": "admin\/privacy-policy",
+    "dashboard.config.promotion.show": {
+      "uri": "admin\/general-configuration\/promotion\/{promotion}",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.updatePrivacyPolicy": {
-      "uri": "admin\/update-privacy-policy",
+    "dashboard.config.promotion.edit": {
+      "uri": "admin\/general-configuration\/promotion\/{promotion}\/edit",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.config.promotion.update": {
+      "uri": "admin\/general-configuration\/promotion\/{promotion}",
+      "methods": ["PUT", "PATCH"]
+    },
+    "dashboard.config.promotion.destroy": {
+      "uri": "admin\/general-configuration\/promotion\/{promotion}",
+      "methods": ["DELETE"]
+    },
+    "dashboard.config.termsAndConditions": {
+      "uri": "admin\/general-configuration\/terms-and-conditions",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.config.updatetermsAndConditions": {
+      "uri": "admin\/general-configuration\/update-terms-and-conditions",
+      "methods": ["POST"]
+    },
+    "dashboard.config.privacyPolicy": {
+      "uri": "admin\/general-configuration\/privacy-policy",
+      "methods": ["GET", "HEAD"]
+    },
+    "dashboard.config.updatePrivacyPolicy": {
+      "uri": "admin\/general-configuration\/update-privacy-policy",
       "methods": ["POST"]
     },
     "dashboard.administrator.authentication-logs.index": {

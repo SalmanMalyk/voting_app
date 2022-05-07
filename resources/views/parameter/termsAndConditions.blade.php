@@ -1,27 +1,36 @@
 @section('title', 'Privacy Policy'.moduleTite())
-
 @push('script')
-	<script src="{{ asset('assets/js/plugins/ckeditor5-classic/build/ckeditor.js') }}"></script>
-	<script type="text/javascript" src="{{ auto_version('js/pages/master/Parameter/termsAndCondition.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/ckeditor5-classic/build/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ auto_version('js/pages/master/Parameter/termsAndCondition.js') }}"></script>
 @endpush
-
 <x-app-layout>
+<x-breadcrumbs>Terms & Conditions</x-breadcrumbs>
 <div class="content">
-	<div class="block block-rounded">
-		<div class="block-header block-header-default">
-			<h3 class="block-title">Terms & Conditions</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<x-saga.card>
+			<x-slot name="header">
+			<h3 class="block-title">{{ menuTitle() }} <small>List</small></h3>
 			<div class="block-options">
-				<button class="btn btn-sm btn-primary font-sm" form="termsAndConditionsForm" type="submit">
-				<i class="fas fa-plus mr-1"></i> Save Terms & Conditions
+				@can('create_terms_and_conditions')
+				<button class="btn btn-light btn-sm mr-3" form="termsAndConditionsForm" type="submit">
+				<i class="si si-plus mr-1"></i> Save Terms & Conditions
 				</button>
+				@endcan
+				<button type="button" class="btn-block-option" data-toggle="block-option"
+				data-action="content_toggle"><i class="si si-arrow-up"></i></button>
+				<button type="button" class="btn-block-option" data-toggle="block-option"
+				data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
 			</div>
-		</div>
-		<div class="block-content">
-			<form action="javascript:void(0)" method="POST" id="termsAndConditionsForm">
-				<div class="mb-4">
-					<textarea id="editor" class="form-control" name="termsAndConditions">@if($parameter){{ $parameter->terms_and_condition }}@endif</textarea>
-				</div>
-			</form>
+			</x-slot>
+			<div class="table-responsive">
+				<form action="javascript:void(0)" method="POST" id="termsAndConditionsForm">
+					<div class="mb-4">
+						<textarea id="editor" class="form-control" name="termsAndConditions">@if($parameter){{ $parameter->terms_and_condition }}@endif</textarea>
+					</div>
+				</form>
+			</div>
+			</x-saga.card>
 		</div>
 	</div>
 </div>

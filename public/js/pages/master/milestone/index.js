@@ -1,4 +1,24 @@
-var path = "dashboard.milestone";
+var path = "dashboard.config.milestone";
+
+$(document).ready(function() {
+
+getMilestones();
+
+})
+
+const getMilestones = async () => {
+    
+    Dashmix.layout('header_loader_on')
+
+    await axios.get(route(`${path}.show`, 1)) 
+        .then(({data}) =>  {
+            $('.milestone').html(data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        .then(() => Dashmix.layout('header_loader_off'))
+}
 
 $("#createMilestone").on("submit", function (event) {
     event.preventDefault();
@@ -25,49 +45,7 @@ $("#createMilestone").on("submit", function (event) {
                         icon: "success",
                     });
                     $("#createMilestoneModal").modal("toggle");
-                    $(".milestone").prepend(`
-							<div class="col-xl-4">
-								<a class="block block-rounded block-link-shadow" href="javascript:void(0)">
-									<div class="block-content block-content-full ribbon ribbon-dark ribbon-modern ribbon-primary">
-										<div class="ribbon-box">
-											<div class="btn-group btn-group-sm mb-2" role="group" aria-label="Small Primary Third group">
-												<button type="button" class="btn btn-primary"><i class="fa fa-pencil-alt" aria-hidden="true"></i></button>
-												<button type="button" class="btn btn-primary"><i class="fa fa-times" aria-hidden="true"></i></button>
-											</div>
-										</div>
-										<div class="py-3 text-center">
-											<i class="fa fa-flag fa-4x text-gray"></i>
-											<p class="fs-lg text-dark mt-3 mb-0">
-												${data.milestone.title}
-											</p>
-											<p class="text-muted mb-0">
-												<strong>Reward</strong> ${data.milestone.reward}  $
-											</p>
-											<p class="fs-sm fw-bold text-muted mb-0">
-												<strong>Vote Count</strong> ${data.milestone.vote_count}
-											</p>
-											
-												<span class="badge badge-${
-                                                    data.milestone.status
-                                                        ? "success"
-                                                        : "danger"
-                                                } badge-pill">
-													<i class="fas fa-${
-                                                        data.milestone.status
-                                                            ? "check"
-                                                            : "times"
-                                                    }-circle fa-fw"></i> ${
-                        data.milestone.status ? "Active" : "In Active"
-                    }
-												</span>
-										</div>
-									</div>
-								<div class="block-content block-content-full block-content-sm text-center bg-body-light">
-									<span class="fs-sm text-muted">Active for ${data.milestone.days} Days</span>
-								</div>
-							</a>
-						</div>
-							`);
+                    getMilestones();
                     $("#createMilestone").trigger("reset");
                     return data;
                 })
@@ -108,6 +86,8 @@ function deleteMilestone(id) {
                             title: data.message,
                             icon: "success",
                         });
+                        
+                        getMilestones();
                     } else {
                         Swal2.fire({
                             icon: "warning",
@@ -116,7 +96,6 @@ function deleteMilestone(id) {
                             confirmButtonColor: "#e74c3c",
                         });
                     }
-                    $(`.milestone-${id}`).remove();
                 })
                 .catch((error) => {
                     console.error(error);
@@ -135,3 +114,54 @@ function deleteMilestone(id) {
         }
     });
 }
+
+
+//Edit Milestone 
+function editMilestone(id) {
+    $.get(route(path+'.edit', id), function( data ) {
+        $("#updateMilestone").attr('data-id', id);
+        $.each(data.milestone, function(index, value) {
+            if (index == 'status') {
+                $(`#updateMilestone #editstatus`).prop('checked', data.milestone.status)
+            } else {
+                $(`#updateMilestone [name="${index}"]`).val(value);
+            }
+        })
+        $("#editMilestoneModal").modal('show');
+    });
+}
+
+//Update Milestone
+$('#updateMilestone').submit(function(event) {
+    event.preventDefault()
+    let id = $(this).attr('data-id') 
+    $.ajax({
+        url: route(path+'.update', id),
+        method: 'PATCH',
+        data: $(this).serialize(),
+        success: function(data) {
+            $(event.target)[0].reset();
+
+            getMilestones();
+
+            $("#editMilestoneModal").modal('hide');
+            Toast.fire({
+                title: data.message,
+                icon: 'success'
+            })
+        },
+        error: function (error) {
+            if(error.status) {
+                Toast.fire({
+                    title: error.responseJSON.message,
+                    icon: 'warning'
+                })
+            } else {
+                Toast.fire({
+                    title: 'Somthing went wrong. Please try again!',
+                    icon: 'error'
+                })
+            }
+        },
+    })
+});

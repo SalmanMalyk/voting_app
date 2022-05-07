@@ -1,16 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\AppController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ListController;
-use App\Http\Controllers\Module\UserController;
-use App\Http\Controllers\General\RoleController;
+use App\Http\Controllers\Administrator\AuthenticationLogController;
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\General\MilestoneController;
 use App\Http\Controllers\General\ParameterController;
 use App\Http\Controllers\General\PermissionController;
-use App\Http\Controllers\Administrator\AuthenticationLogController;
+use App\Http\Controllers\General\PromotionController;
+use App\Http\Controllers\General\RoleController;
+use App\Http\Controllers\Module\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('login', [AuthController::class, 'loginView'])->name('loginView')->middleware('guest:admin');
 Route::post('login', [AuthController::class, 'attempt'])->name('login');
@@ -49,17 +49,21 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
         /* --------------- Permissions -------------------- */
         Route::resource('permissions', PermissionController::class);
+
+        /* --------------- Milestone -------------------- */
+        Route::resource('milestone', MilestoneController::class);
+
+        /* --------------- Promotion -------------------- */
+        Route::resource('promotion', PromotionController::class);
+
+        /* --------------- Terms and Conditions -------------------- */
+        Route::get('/terms-and-conditions', [ParameterController::class, 'termsAndConditions'])->name('termsAndConditions');
+        Route::post('/update-terms-and-conditions', [ParameterController::class, 'updatetermsAndConditions'])->name('updatetermsAndConditions');
+
+        /* --------------- Privacy Policy -------------------- */
+        Route::get('/privacy-policy', [ParameterController::class, 'privacyPolicy'])->name('privacyPolicy');
+        Route::post('/update-privacy-policy', [ParameterController::class, 'updatePrivacyPolicy'])->name('updatePrivacyPolicy');
     });
-
-    /* --------------- Milestone -------------------- */
-    Route::resource('milestone', MilestoneController::class);
-
-    Route::get('/terms-and-conditions', [ParameterController::class, 'termsAndConditions'])->name('termsAndConditions');
-    Route::post('/update-terms-and-conditions', [ParameterController::class, 'updatetermsAndConditions'])->name('updatetermsAndConditions');
-
-    /* --------------- Privacy Policy -------------------- */
-    Route::get('/privacy-policy', [ParameterController::class, 'privacyPolicy'])->name('privacyPolicy');
-    Route::post('/update-privacy-policy', [ParameterController::class, 'updatePrivacyPolicy'])->name('updatePrivacyPolicy');
 
     /* --------------- Master ROUTES -------------------- */
     Route::group(['prefix' => 'administrator', 'as' => 'administrator.', 'title' => 'Administrator'], function () {

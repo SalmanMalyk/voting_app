@@ -43,7 +43,9 @@ class FortifyServiceProvider extends ServiceProvider
         ];
 
         foreach ($methods as $method => $view) {
-            Fortify::$method(fn () => view("client-app.auth.$view"));
+            Fortify::$method(function() use ($view) {
+                return view("client-app.auth.$view");
+            });
         }
         
         

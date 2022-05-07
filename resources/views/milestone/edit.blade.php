@@ -1,6 +1,6 @@
-<x-saga.modal target="createMilestoneModal" modalType="modal-lg">
-<x-slot name="title">Create new Milestone</x-slot>
-<form action="javascript:void(0)" id="createMilestone">
+<x-saga.modal target="editMilestoneModal" modalType="modal-lg">
+<x-slot name="title">Update Milestone</x-slot>
+<form action="javascript:void(0)" id="updateMilestone">
 	@csrf
 	<div class="form-row">
 		<div class="col-12 mb-2">
@@ -22,15 +22,15 @@
 		<div class="col-12 mb-2">
 			<label class="font-size-sm mb-1">Milestone Status:<span class="text-danger">*</span></label>
 			<div class="custom-control custom-switch mb-1">
-				<input type="checkbox" class="custom-control-input" id="status" value="1" name="status" checked>
-				<label class="custom-control-label" for="status"></label>
+				<input type="checkbox" class="custom-control-input" id="editstatus" value="1" name="status">
+				<label class="custom-control-label" for="editstatus"></label>
 			</div>
 		</div>
 	</div>
 </form>
 <x-slot name="footer">
-<button class="btn btn-sm btn-primary font-sm" form="createMilestone" type="submit">
-<i class="fas fa-plus mr-1"></i> Create Milestone
+<button class="btn btn-sm btn-primary font-sm" form="updateMilestone" type="submit">
+<i class="fas fa-plus mr-1"></i> Update Milestone
 </button>
 </x-slot>
 </x-saga.modal>

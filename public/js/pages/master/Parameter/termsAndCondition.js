@@ -1,4 +1,4 @@
-var path = 'dashboard';
+var path = 'dashboard.config';
 function MinHeightPlugin(editor) {
   this.editor = editor;
 }
@@ -7,7 +7,7 @@ MinHeightPlugin.prototype.init = function() {
   this.editor.ui.view.editable.extendTemplate({
     attributes: {
       style: {
-        minHeight: '300px'
+        minHeight: '100vh'
       }
     }
   });
