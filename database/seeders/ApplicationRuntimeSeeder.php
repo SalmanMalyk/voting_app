@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Enums\UserType;
-use App\Models\Admin;
 use App\Models\User;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Admin;
+use App\Enums\UserType;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
-
 use function PHPSTORM_META\map;
+use Illuminate\Database\Seeder;
+use Harimayco\Menu\Models\Menus;
+
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class ApplicationRuntimeSeeder extends Seeder
 {
@@ -60,6 +61,11 @@ class ApplicationRuntimeSeeder extends Seeder
             'name' => 'User',
             'email' => 'user@gmail.com',
             'password' => Hash::make('password'),
+        ]);
+
+        Menus::create([
+            'name' => 'Main Menu',
+            'selected' => true
         ]);
     }
 }

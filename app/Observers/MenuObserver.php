@@ -25,7 +25,7 @@ class MenuObserver
             
             Permission::updateOrCreate(['name' => $name, 'menu_item_id' => $menuItems->id], [
                 'name' => $name,
-                'guard_name' => 'sanctum',
+                'guard_name' => 'admin',
                 'menu_item_id' => $menuItems->id,
                 'permission_name' => $permission,
                 'module_name' => Str::snake($menuItems->label),

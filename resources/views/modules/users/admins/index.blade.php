@@ -20,7 +20,7 @@
                     <x-slot name="header">
                         <h3 class="block-title">{{ menuTitle() }} <small>List</small></h3>
                         <div class="block-options">
-                            @can('create_admins')
+                            @can('create_admin')
                                 <a href="javascript:void(0)" class="btn btn-light btn-sm mr-3" data-toggle="modal"
                                     data-target="#createModal"><i class="si si-plus mr-1"></i> Create Admin</a>
                             @endcan

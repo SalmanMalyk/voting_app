@@ -1,8 +1,8 @@
 @section('title', 'Privacy Policy'.moduleTite())
 
 @push('script')
-	<script src="{{ asset('assets\js\plugins\ckeditor5-classic\build\ckeditor.js') }}"></script>
-	<script type="text/javascript" src="js/pages/master/Parameter/termsAndCondition.js"></script>
+	<script src="{{ asset('assets/js/plugins/ckeditor5-classic/build/ckeditor.js') }}"></script>
+	<script type="text/javascript" src="{{ auto_version('js/pages/master/Parameter/termsAndCondition.js') }}"></script>
 @endpush
 
 <x-app-layout>

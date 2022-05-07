@@ -62,10 +62,17 @@ class ListController extends Controller
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-default-primary">
                         ';
-                    if (auth()->user()->can('edit_schedule_blocks')) {
+                    if (auth()->user()->can('edit_admin')) {
                         $btn .= '
                             <a href="javascript:void(0)" class="dropdown-item mb-0 font-sm" onclick="deliverySchedule(' . $row->id . ')">
                                 <i class="fas fa-edit mr-1 text-warning"></i> Edit
+                            </a>
+                        ';
+                    }
+                    if (auth()->user()->can('delete_admin')) {
+                        $btn .= '
+                            <a href="javascript:void(0)" class="dropdown-item mb-0 font-sm" onclick="deliverySchedule(' . $row->id . ')">
+                                <i class="fas fa-times mr-1 text-danger"></i> Delete
                             </a>
                         ';
                     }

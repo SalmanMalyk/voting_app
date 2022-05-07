@@ -29,11 +29,7 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax() || $request->wantsJson()) {
-            return Role::where('name', '!=', 'Super Admin')->get(['id', 'name']);
-        }
-
-        $roles = Role::orderBy('id', 'DESC')->paginate(5);
+        $roles = Role::where('name', '!=', 'Super Admin')->orderBy('id', 'DESC')->paginate(5);
 
         return view($this->path . '.index', compact('roles'));
     }

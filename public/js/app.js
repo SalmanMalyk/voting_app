@@ -270,8 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Ziggy": () => (/* binding */ Ziggy)
 /* harmony export */ });
 var Ziggy = {
-  "url": "http:\/\/localhost:8000",
-  "port": 8000,
+  "url": "http:\/\/localhost:1000",
+  "port": 1000,
   "defaults": {},
   "routes": {
     "debugbar.openhandler": {

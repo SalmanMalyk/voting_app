@@ -162,7 +162,7 @@ use Illuminate\Support\Facades\Notification;
 			if (!file_exists(public_path().'/'.$file)) {
 				return $file;
 			}
-
+			
 			$mtime = filemtime($file);
 
 			if(config('app.env') == 'production') {

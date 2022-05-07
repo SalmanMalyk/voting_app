@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ListController;
 use App\Http\Controllers\Module\UserController;
 use App\Http\Controllers\General\RoleController;
 use App\Http\Controllers\General\MilestoneController;
+use App\Http\Controllers\General\ParameterController;
 use App\Http\Controllers\General\PermissionController;
 use App\Http\Controllers\Administrator\AuthenticationLogController;
 
