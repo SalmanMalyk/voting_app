@@ -1,7 +1,8 @@
 @section('title', 'Admin | Users ' . moduleTite())
 
 @push('modals')
-    @include('modules/users/admins/create')
+    @include('modules.users.admins.create')
+    @include('modules.users.admins.edit')
 @endpush
 
 @push('script')

@@ -6,8 +6,11 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Actions\Admin\CreateAdmin;
+use App\Actions\Admin\UpdateAdmin;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 
 class ListController extends Controller
 {
@@ -64,14 +67,14 @@ class ListController extends Controller
                         ';
                     if (auth()->user()->can('edit_admin')) {
                         $btn .= '
-                            <a href="javascript:void(0)" class="dropdown-item mb-0 font-sm" onclick="deliverySchedule(' . $row->id . ')">
+                            <a href="javascript:void(0)" class="dropdown-item mb-0 font-sm" onclick="edit(' . $row->id . ')">
                                 <i class="fas fa-edit mr-1 text-warning"></i> Edit
                             </a>
                         ';
                     }
                     if (auth()->user()->can('delete_admin')) {
                         $btn .= '
-                            <a href="javascript:void(0)" class="dropdown-item mb-0 font-sm" onclick="deliverySchedule(' . $row->id . ')">
+                            <a href="javascript:void(0)" class="dropdown-item mb-0 font-sm" onclick="deleteAdmin(' . $row->id . ')">
                                 <i class="fas fa-times mr-1 text-danger"></i> Delete
                             </a>
                         ';
@@ -106,43 +109,32 @@ class ListController extends Controller
      */
     public function store(Request $request)
     {
-        $admin = $request->validate([
+        $data = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:admins,email',
             'password' => 'required|min:8|confirmed',
             'role_id' => 'required|exists:roles,id',
         ]);
 
-        $admin = CreateAdmin::execute($admin);
-        // TODO: Assigning Role
-        if ($admin) {
-            logger('Assigning Role:', [$admin]);
+        // Call Create Admin Action
+        try {
+            DB::beginTransaction();
+
+            CreateAdmin::execute($data);
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Account created successfully'
+            ], 200);            
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Oops! Something went wrong here',
+                'error' => $th->getMessage()
+            ], 500);
         }
-
-
-        return redirect()->route($this->route . '.index')->with('success', 'User Created Successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -152,9 +144,34 @@ class ListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Admin $admin)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:admins,email,'.$admin->id,
+            'password' => 'required|min:8|confirmed',
+            'role_id' => 'required|exists:roles,id',
+            'password' => 'same:password_confirmation'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            UpdateAdmin::execute($admin, $data);
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Account updated successfully'
+            ], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Oops! Something went wrong here',
+                'error' => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -163,8 +180,18 @@ class ListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Admin $admin)
     {
-        //
+        if (auth('admin')->id() == $admin->id) {
+            $error = ValidationException::withMessages([
+                'id' => ["Sorry! You cannot delete yourself."]
+            ]);
+            throw $error;
+        }
+        $admin->delete();
+
+        return response()->json([
+            'message' => "{$admin->name} deleted successfully   "
+        ], 200);
     }
 }

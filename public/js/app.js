@@ -270,8 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Ziggy": () => (/* binding */ Ziggy)
 /* harmony export */ });
 var Ziggy = {
-  "url": "http:\/\/localhost:8001",
-  "port": 8001,
+  "url": "http:\/\/localhost:1000",
+  "port": 1000,
   "defaults": {},
   "routes": {
     "debugbar.openhandler": {
@@ -418,92 +418,8 @@ var Ziggy = {
       "uri": "api\/v1\/invoices\/{invoice}\/update",
       "methods": ["PATCH"]
     },
-    "api.customersdiscount.index": {
-      "uri": "api\/get-customersdiscount-list",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.customers.index": {
-      "uri": "api\/get-customers-list",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getUsersByParam": {
-      "uri": "api\/get-users-by-param",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getUserByRole": {
-      "uri": "api\/get-users-by-role",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getAllUsersList": {
-      "uri": "api\/getAllUsersList",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getCustomerTypes": {
-      "uri": "api\/getCustomerTypes",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getMembershipTypes": {
-      "uri": "api\/getMembershipTypes",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getTowns": {
-      "uri": "api\/getTowns",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getTownBlocks": {
-      "uri": "api\/getTownBlocks",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getAllProducts": {
-      "uri": "api\/getAllProducts",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.customers.show": {
-      "uri": "api\/customers\/{customer}",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getTownByNullZone": {
-      "uri": "api\/getTownByNullZone",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.zones.index": {
-      "uri": "api\/zones\/list",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.customers.customerLedgerInfo": {
-      "uri": "api\/customer-ledger-info\/{branch}",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.invoices.getInvoiceDetails": {
-      "uri": "api\/{invoice}\/get-invoice-details",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.invoices.updateInvoiceDetails": {
-      "uri": "api\/{invoice}\/update-invoice-details",
-      "methods": ["POST"]
-    },
-    "api.searchThroughAddress": {
-      "uri": "api\/search-street-building",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.invoices.existingInvoice": {
-      "uri": "api\/{customerBranch}\/existing-invoice",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getScheduleVehicles": {
-      "uri": "api\/getScheduleVehicles",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getVehicleInfo": {
-      "uri": "api\/{vehicle}\/getVehicleInfo",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getDeliveryScheduleInfo": {
-      "uri": "api\/{scheduleDelivery}\/getDeliveryScheduleInfo",
-      "methods": ["GET", "HEAD"]
-    },
-    "api.getPaymentTypes": {
-      "uri": "api\/getPaymentTypes",
+    "api.getRoleName": {
+      "uri": "api\/getRoleName",
       "methods": ["GET", "HEAD"]
     },
     "index": {
@@ -679,85 +595,54 @@ var Ziggy = {
         "permission": "id"
       }
     },
-    "dashboard.config.milestone.index": {
-      "uri": "admin\/general-configuration\/milestone",
+    "dashboard.milestone.index": {
+      "uri": "admin\/milestone",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.config.milestone.create": {
-      "uri": "admin\/general-configuration\/milestone\/create",
+    "dashboard.milestone.create": {
+      "uri": "admin\/milestone\/create",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.config.milestone.store": {
-      "uri": "admin\/general-configuration\/milestone",
+    "dashboard.milestone.store": {
+      "uri": "admin\/milestone",
       "methods": ["POST"]
     },
-    "dashboard.config.milestone.show": {
-      "uri": "admin\/general-configuration\/milestone\/{milestone}",
+    "dashboard.milestone.show": {
+      "uri": "admin\/milestone\/{milestone}",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.config.milestone.edit": {
-      "uri": "admin\/general-configuration\/milestone\/{milestone}\/edit",
-      "methods": ["GET", "HEAD"],
-      "bindings": {
-        "milestone": "id"
-      }
+    "dashboard.milestone.edit": {
+      "uri": "admin\/milestone\/{milestone}\/edit",
+      "methods": ["GET", "HEAD"]
     },
-    "dashboard.config.milestone.update": {
-      "uri": "admin\/general-configuration\/milestone\/{milestone}",
+    "dashboard.milestone.update": {
+      "uri": "admin\/milestone\/{milestone}",
       "methods": ["PUT", "PATCH"],
       "bindings": {
         "milestone": "id"
       }
     },
-    "dashboard.config.milestone.destroy": {
-      "uri": "admin\/general-configuration\/milestone\/{milestone}",
+    "dashboard.milestone.destroy": {
+      "uri": "admin\/milestone\/{milestone}",
       "methods": ["DELETE"],
       "bindings": {
         "milestone": "id"
       }
     },
-    "dashboard.config.promotion.index": {
-      "uri": "admin\/general-configuration\/promotion",
+    "dashboard.termsAndConditions": {
+      "uri": "admin\/terms-and-conditions",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.config.promotion.create": {
-      "uri": "admin\/general-configuration\/promotion\/create",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.config.promotion.store": {
-      "uri": "admin\/general-configuration\/promotion",
+    "dashboard.updatetermsAndConditions": {
+      "uri": "admin\/update-terms-and-conditions",
       "methods": ["POST"]
     },
-    "dashboard.config.promotion.show": {
-      "uri": "admin\/general-configuration\/promotion\/{promotion}",
+    "dashboard.privacyPolicy": {
+      "uri": "admin\/privacy-policy",
       "methods": ["GET", "HEAD"]
     },
-    "dashboard.config.promotion.edit": {
-      "uri": "admin\/general-configuration\/promotion\/{promotion}\/edit",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.config.promotion.update": {
-      "uri": "admin\/general-configuration\/promotion\/{promotion}",
-      "methods": ["PUT", "PATCH"]
-    },
-    "dashboard.config.promotion.destroy": {
-      "uri": "admin\/general-configuration\/promotion\/{promotion}",
-      "methods": ["DELETE"]
-    },
-    "dashboard.config.termsAndConditions": {
-      "uri": "admin\/general-configuration\/terms-and-conditions",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.config.updatetermsAndConditions": {
-      "uri": "admin\/general-configuration\/update-terms-and-conditions",
-      "methods": ["POST"]
-    },
-    "dashboard.config.privacyPolicy": {
-      "uri": "admin\/general-configuration\/privacy-policy",
-      "methods": ["GET", "HEAD"]
-    },
-    "dashboard.config.updatePrivacyPolicy": {
-      "uri": "admin\/general-configuration\/update-privacy-policy",
+    "dashboard.updatePrivacyPolicy": {
+      "uri": "admin\/update-privacy-policy",
       "methods": ["POST"]
     },
     "dashboard.administrator.authentication-logs.index": {

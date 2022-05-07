@@ -4,6 +4,7 @@ namespace App\Actions\Admin;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -14,9 +15,10 @@ class CreateAdmin
         $adminUser = Admin::create([
             'name' => $admin['name'],
             'email' => $admin['email'],
-            'password' => Hash::make($admin['passwor']),
+            'password' => Hash::make($admin['password']),
         ]);
+        $adminUser->assignRole(Role::find($admin['role_id']));
 
-        $admin->assignRole(Role::find($request->role_id));
+        return $admin;
     }
 }

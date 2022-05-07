@@ -51,54 +51,9 @@ Route::group([
 
 
 Route::group(['as' => 'api.'], function () {	
-	Route::get('/get-customersdiscount-list', [CustomerDiscountController::class, 'index'])->name('customersdiscount.index');
 
-	Route::get('/get-customers-list', [CustomerController::class, 'index'])->name('customers.index');
+	Route::get('/getRoleName', [DataController::class, 'getRoleName'])->name('getRoleName');
 
-	Route::get('/get-users-by-param', [DataController::class, 'getUsersByParam'])->name('getUsersByParam');
-
-	Route::get('/get-users-by-role', [DataController::class, 'getUserByRole'])->name('getUserByRole');
-
-	Route::get('/getAllUsersList', [DataController::class, 'getAllUsersList'])->name('getAllUsersList');
-
-
-	Route::get('/getCustomerTypes', [DataController::class, 'getCustomerTypes'])->name('getCustomerTypes');
-
-	Route::get('/getMembershipTypes', [DataController::class, 'getMembershipTypes'])->name('getMembershipTypes');
-
-	Route::get('/getTowns', [DataController::class, 'getTowns'])->name('getTowns');
-
-	Route::get('/getTownBlocks', [DataController::class, 'getTownBlocks'])->name('getTownBlocks');
-
-	Route::get('/getAllProducts', [DataController::class, 'getAllProducts'])->name('getAllProducts');
-
-	Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
-
-	Route::get('/getTownByNullZone', [DataController::class, 'getTownByNullZone'])->name('getTownByNullZone');
-
-	Route::get('/zones/list', [DataController::class, 'getAllZones'])->name('zones.index');
-   
-	Route::get('/customer-ledger-info/{branch}', [CustomerController::class, 'customerLedgerInfo'])->name('customers.customerLedgerInfo');
-	
-	Route::get('/{invoice}/get-invoice-details', [InvoiceController::class, 'getInvoiceDetails'])->name('invoices.getInvoiceDetails');
-
-	Route::post('/{invoice}/update-invoice-details', [InvoiceController::class, 'updateInvoiceDetails'])->name('invoices.updateInvoiceDetails');
-
-	// Search street / building names
-	Route::get('/search-street-building', [DataController::class, 'searchThroughAddress'])->name('searchThroughAddress');
-
-	Route::get('/{customerBranch}/existing-invoice', [InvoiceController::class, 'existingInvoice'])->name('invoices.existingInvoice');
-
-	// get avaiable vehicles
-	Route::get('/getScheduleVehicles', [DataController::class, 'getScheduleVehicles'])->name('getScheduleVehicles');
-	// get vehicle info
-	Route::get('/{vehicle}/getVehicleInfo', [DataController::class, 'getVehicleInfo'])->name('getVehicleInfo');
-	
-	// * get specific schedule info 
-	Route::get('/{scheduleDelivery}/getDeliveryScheduleInfo', [DataController::class, 'getDeliveryScheduleInfo'])->name('getDeliveryScheduleInfo');
-
-	// * get payment types
-	Route::get('/getPaymentTypes', [DataController::class, 'getPaymentTypes'])->name('getPaymentTypes');
 });
 
 
